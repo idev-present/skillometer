@@ -7,6 +7,7 @@ table( user ) {
   primary_key( id ): UUID
   column( isActive ): BOOLEAN
   column( telegramId ): UUID
+  column( email ): STRING
   foreign_key( cvId ): UUID <<FK>>
 }
 table( cv ) {
