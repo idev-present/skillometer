@@ -1,37 +1,56 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-' uncomment the following line and comment the first to use locally
+' Uncomment the following line and comment the first to use locally
 ' !include C4_Container.puml
 
-' LAYOUT_TOP_DOWN()
-' LAYOUT_AS_SKETCH()
 LAYOUT_WITH_LEGEND()
 
-title Container diagram for Internet Banking System
+title C4 Container для системы "Skillometer"
 
-Person(customer, Customer, "A customer of the bank, with personal bank accounts")
+Person(customer, "Рекрутер", "Пользователь системы с персональным аккаунтом.")
+Person_Ext(user, "Соискатель", "Пользователь Телеграм.")
 
-System_Boundary(c1, "Internet Banking") {
-    Container(web_app, "Web Application", "Java, Spring MVC", "Delivers the static content and the Internet banking SPA")
-    Container(spa, "Single-Page App", "JavaScript, Angular", "Provides all the Internet banking functionality to customers via their web browser")
-    Container(mobile_app, "Mobile App", "C#, Xamarin", "Provides a limited subset of the Internet banking functionality to customers via their mobile device")
-    ContainerDb(database, "Database", "SQL Database", "Stores user registration information, hashed auth credentials, access logs, etc.")
-    Container(backend_api, "API Application", "Java, Docker Container", "Provides Internet banking functionality via API")
+System_Boundary(skillometer_system, "Система Skillometer") {
+    Container(web_app, "Веб-приложение", "React", "Пользовательский интерфейс для рекрутеров")
+    Container(api, "API", "Node.js", "Обрабатывает запросы от всех пользователей и взаимодействует с внешними системами")
+    Container(db, "База данных", "PostgreSQL", "Хранит данные о вакансиях, резюме и пользователях")
+    Container(notifications, "Модуль уведомлений", "Node.js", "Отправляет уведомления пользователям")
+    Container(google_integration, "Интеграция с Google Календарем", "Node.js", "Обеспечивает взаимодействие с Google Календарем")
+    Container(telegram_integration, "Интеграция с Telegram", "Node.js", "Обеспечивает взаимодействие с Telegram клиентом")
+    Container(gpt_integration, "Интеграция с чат GPT", "Node.js", "Обмен данными с чат GPT для редактирования резюме")
+    Container(s3_integration, "Интеграция с хранилищем S3", "Node.js", "Хранение документов (резюме)")
+
+    Container(habr_integration, "Интеграция с Habr", "Node.js", "Получение данных из Habr")
+    Container(headhunter_integration, "Интеграция с HeadHunter", "Node.js", "Получение данных из HeadHunter")
+    Container(reksoft_integration, "Интеграция с Reksoft", "Node.js", "Получение данных из Reksoft")
 }
 
-System_Ext(email_system, "E-Mail System", "The internal Microsoft Exchange system")
-System_Ext(banking_system, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+System_Ext(smtp, "SMTP", "Служит для отправки уведомлений участвующим лицам процесса")
+System_Ext(telegram, "Telegram", "Система задействована как клиентское приложение")
+System_Ext(google, "Google Календарь", "Сервис планирования и организации времени, который используется для управления рабочим графиком рекрутера и назначения встреч с соискателями")
+System_Ext(habr, "Habr карьера", "Система из которой получаем актуальные вакансии")
+System_Ext(headhunter, "HeadHunter", "Система из которой получаем актуальные вакансии")
+System_Ext(reksoft, "Reksoft", "ATS система, система из которой получаем актуальные вакансии, в дальнейшем как админское приложение")
+System_Ext(gpt, "чат GPT", "ИИ для помощи в редактировании резюме")
+System_Ext(s3, "Хранилище S3", "Система используемая для хранения документов (резюме)")
 
-Rel(customer, web_app, "Uses", "HTTPS")
-Rel(customer, spa, "Uses", "HTTPS")
-Rel(customer, mobile_app, "Uses")
+Rel(customer, web_app, "Использует")
+Rel_Back(customer, smtp, "Отправляет e-mails на")
+Rel_Back(user, smtp, "Отправляет e-mails на")
+Rel_Back(notifications, smtp, "Отправляет e-mails на")
+BiRel(api, telegram_integration, "Обмен данными")
+Rel(user, telegram, "Использует")
+Rel_Back(user, telegram, "Отображает информацию")
+Rel(habr_integration, habr, "Получает данные из")
+Rel(headhunter_integration, headhunter, "Получает данные из")
+Rel(reksoft_integration, reksoft, "Получает данные из")
+BiRel(api, google_integration, "Обмен данными")
+BiRel(api, gpt_integration, "Обмен данными")
+BiRel(api, s3_integration, "Обмен данными")
+Rel(api, db, "Читает из и пишет в")
+Rel(api, habr_integration, "Запрашивает данные")
+Rel(api, headhunter_integration, "Запрашивает данные")
+Rel(api, reksoft_integration, "Запрашивает данные")
+Rel(web_app, api, "Отправляет запросы к")
 
-Rel_Neighbor(web_app, spa, "Delivers")
-Rel(spa, backend_api, "Uses", "async, JSON/HTTPS")
-Rel(mobile_app, backend_api, "Uses", "async, JSON/HTTPS")
-Rel_Back_Neighbor(database, backend_api, "Reads from and writes to", "sync, JDBC")
-
-Rel_Back(customer, email_system, "Sends e-mails to")
-Rel_Back(email_system, backend_api, "Sends e-mails using", "sync, SMTP")
-Rel_Neighbor(backend_api, banking_system, "Uses", "sync/async, XML/HTTPS")
 @enduml
