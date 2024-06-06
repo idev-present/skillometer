@@ -1,0 +1,28 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title C4 Context системы "Skillometer"
+
+Person(customer, "Рекрутер", "Пользователь системы с персональным аккаунтом.")
+Person_Ext(user, "Соискатель", "Пользователь Телеграм.")
+System(skillometer_system, "Системы Skillometer", "Система позволяющее контролировать актуальные вакансии и резюме соискателей")
+
+System_Ext(mail_system, "SMTP", "")
+System_Ext(сlient_application, "Telegram", "")
+System_Ext(google, "Google Календарь", "")
+System_Ext(habr, "Habr карьера", "")
+System_Ext(headhunter, "HeadHunter", "")
+System_Ext(reksoft, "Reksoft", "")
+System_Ext(gpt, "чат GPT", "")
+System_Ext(s3, "Хранилище S3", "")
+
+Rel(customer, skillometer_system, "Uses")
+Rel_Back(customer, mail_system, "Sends e-mails to")
+Rel_Back(user, mail_system, "Sends e-mails to")
+Rel_Neighbor(skillometer_system, mail_system, "Sends e-mails", "SMTP")
+Rel(skillometer_system, сlient_application, "Uses")
+@enduml
