@@ -1,0 +1,2535 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Skillometer API",
+    "description": "Service for recruiters and applicants",
+    "contact": {
+      "name": "IDEV team",
+      "email": "info@idev-present.com"
+    },
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "/api/v1"
+    }
+  ],
+  "paths": {
+    "/dict/currency": {
+      "get": {
+        "tags": [
+          "dict"
+        ],
+        "summary": "Get Currency List",
+        "operationId": "get_currency_list_dict_currency_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Currency"
+                  },
+                  "type": "array",
+                  "title": "Response Get Currency List Dict Currency Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/city": {
+      "get": {
+        "tags": [
+          "dict"
+        ],
+        "summary": "City List",
+        "operationId": "city_list_dict_city_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/City"
+                  },
+                  "type": "array",
+                  "title": "Response City List Dict City Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/employment_type": {
+      "get": {
+        "tags": [
+          "dict"
+        ],
+        "summary": "Employment Type List",
+        "operationId": "employment_type_list_dict_employment_type_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/EmploymentType"
+                  },
+                  "type": "array",
+                  "title": "Response Employment Type List Dict Employment Type Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/division": {
+      "get": {
+        "tags": [
+          "dict"
+        ],
+        "summary": "Division List",
+        "operationId": "division_list_dict_division_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Division"
+                  },
+                  "type": "array",
+                  "title": "Response Division List Dict Division Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/qualification": {
+      "get": {
+        "tags": [
+          "dict"
+        ],
+        "summary": "Qualification List",
+        "operationId": "qualification_list_dict_qualification_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Qualification"
+                  },
+                  "type": "array",
+                  "title": "Response Qualification List Dict Qualification Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/search_status": {
+      "get": {
+        "tags": [
+          "dict"
+        ],
+        "summary": "Search Status List",
+        "operationId": "search_status_list_dict_search_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SearchStatus"
+                  },
+                  "type": "array",
+                  "title": "Response Search Status List Dict Search Status Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/skill": {
+      "get": {
+        "tags": [
+          "dict"
+        ],
+        "summary": "Skill List",
+        "operationId": "skill_list_dict_skill_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Skill"
+                  },
+                  "type": "array",
+                  "title": "Response Skill List Dict Skill Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vacancy/": {
+      "get": {
+        "tags": [
+          "vacancy"
+        ],
+        "summary": "Vacancy List",
+        "operationId": "vacancy_list_vacancy__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/VacancyListItem"
+                  },
+                  "type": "array",
+                  "title": "Response Vacancy List Vacancy  Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "vacancy"
+        ],
+        "summary": "Create Vacancy",
+        "operationId": "create_vacancy_vacancy__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VacancyForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vacancy"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vacancy/{vacancy_id}": {
+      "get": {
+        "tags": [
+          "vacancy"
+        ],
+        "summary": "Get Vacancy",
+        "operationId": "get_vacancy_vacancy__vacancy_id__get",
+        "parameters": [
+          {
+            "name": "vacancy_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Vacancy Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vacancy"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "vacancy"
+        ],
+        "summary": "Update Vacancy",
+        "operationId": "update_vacancy_vacancy__vacancy_id__put",
+        "parameters": [
+          {
+            "name": "vacancy_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Vacancy Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VacancyUpdateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vacancy"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "vacancy"
+        ],
+        "summary": "Delete Vacancy",
+        "operationId": "delete_vacancy_vacancy__vacancy_id__delete",
+        "parameters": [
+          {
+            "name": "vacancy_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Vacancy Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/company/": {
+      "get": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Company List",
+        "operationId": "company_list_company__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/applicant/": {
+      "get": {
+        "tags": [
+          "applicant"
+        ],
+        "summary": "Applicant List",
+        "operationId": "applicant_list_applicant__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ApplicantListItem"
+                  },
+                  "type": "array",
+                  "title": "Response Applicant List Applicant  Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "applicant"
+        ],
+        "summary": "Create Applicant",
+        "operationId": "create_applicant_applicant__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicantForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Applicant"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/applicant/{applicant_id}": {
+      "get": {
+        "tags": [
+          "applicant"
+        ],
+        "summary": "Get Applicant",
+        "operationId": "get_applicant_applicant__applicant_id__get",
+        "parameters": [
+          {
+            "name": "applicant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Applicant Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Applicant"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "applicant"
+        ],
+        "summary": "Update Applicant",
+        "operationId": "update_applicant_applicant__applicant_id__put",
+        "parameters": [
+          {
+            "name": "applicant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Applicant Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicantUpdateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Applicant"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "applicant"
+        ],
+        "summary": "Delete Applicant",
+        "operationId": "delete_applicant_applicant__applicant_id__delete",
+        "parameters": [
+          {
+            "name": "applicant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Applicant Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reply/": {
+      "get": {
+        "tags": [
+          "reply"
+        ],
+        "summary": "Reply List",
+        "operationId": "reply_list_reply__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ReplyInDB"
+                  },
+                  "type": "array",
+                  "title": "Response Reply List Reply  Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "reply"
+        ],
+        "summary": "Create",
+        "operationId": "create_reply__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplyInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplyInDB"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/auth": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Auth",
+        "operationId": "auth_user_auth_get",
+        "parameters": [
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "docs",
+              "title": "State"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/me": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Me",
+        "operationId": "me_user_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInDB"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logout",
+        "operationId": "logout_user_logout_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Applicant": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "salary_from": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Salary From"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "age": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Age"
+          },
+          "is_relocation": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Relocation",
+            "description": "Готовность к переезду",
+            "default": false
+          },
+          "is_remote": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Remote",
+            "description": "Готовность к удаленной работе",
+            "default": false
+          },
+          "search_status_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Search Status Id"
+          },
+          "qualification_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qualification Id"
+          },
+          "division_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Division Id"
+          },
+          "city_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City Id"
+          },
+          "skill_set": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skill Set"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "experience": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Experience",
+            "description": "Суммарный опыт работы, калькулируется из списка"
+          },
+          "last_visited": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Visited",
+            "description": "Дата/время последнего посещения"
+          },
+          "registered_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registered At",
+            "description": "Дата/время регистрации"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "salary_from",
+          "currency",
+          "age",
+          "id",
+          "user_id"
+        ],
+        "title": "Applicant"
+      },
+      "ApplicantForm": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "salary_from": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Salary From"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency",
+            "default": "RUR"
+          },
+          "age": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Age"
+          },
+          "is_relocation": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Relocation",
+            "description": "Готовность к переезду",
+            "default": false
+          },
+          "is_remote": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Remote",
+            "description": "Готовность к удаленной работе",
+            "default": false
+          },
+          "search_status_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Search Status Id"
+          },
+          "qualification_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qualification Id"
+          },
+          "division_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Division Id"
+          },
+          "city_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City Id"
+          },
+          "skill_set": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skill Set"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "salary_from",
+          "age"
+        ],
+        "title": "ApplicantForm"
+      },
+      "ApplicantListItem": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "salary_from": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Salary From"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "age": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Age"
+          },
+          "is_relocation": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Relocation",
+            "description": "Готовность к переезду",
+            "default": false
+          },
+          "is_remote": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Remote",
+            "description": "Готовность к удаленной работе",
+            "default": false
+          },
+          "search_status_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Search Status Id"
+          },
+          "qualification_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qualification Id"
+          },
+          "division_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Division Id"
+          },
+          "city_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City Id"
+          },
+          "skill_set": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skill Set"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "experience": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Experience",
+            "description": "Суммарный опыт работы, калькулируется из списка"
+          },
+          "last_visited": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Visited",
+            "description": "Дата/время последнего посещения"
+          },
+          "registered_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registered At",
+            "description": "Дата/время регистрации"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "salary_from",
+          "currency",
+          "age",
+          "id",
+          "user_id"
+        ],
+        "title": "ApplicantListItem"
+      },
+      "ApplicantUpdateForm": {
+        "properties": {
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "salary_from": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Salary From"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency",
+            "default": "RUR"
+          },
+          "age": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Age"
+          },
+          "is_relocation": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Relocation",
+            "description": "Готовность к переезду",
+            "default": false
+          },
+          "is_remote": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Remote",
+            "description": "Готовность к удаленной работе",
+            "default": false
+          },
+          "search_status_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Search Status Id"
+          },
+          "qualification_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qualification Id"
+          },
+          "division_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Division Id"
+          },
+          "city_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City Id"
+          },
+          "skill_set": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skill Set"
+          }
+        },
+        "type": "object",
+        "title": "ApplicantUpdateForm"
+      },
+      "City": {
+        "properties": {
+          "fias_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fias Id"
+          },
+          "habr_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Habr Id"
+          },
+          "habr_alias": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Habr Alias"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "country_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country Name"
+          },
+          "region_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Region Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "fias_id",
+          "habr_id",
+          "habr_alias",
+          "name",
+          "country_name",
+          "region_name"
+        ],
+        "title": "City"
+      },
+      "Currency": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "title": "Currency"
+      },
+      "Division": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "habr_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Habr Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "habr_id"
+        ],
+        "title": "Division"
+      },
+      "EmploymentType": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "habr_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Habr Id"
+          },
+          "hh_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hh Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "habr_id",
+          "hh_id"
+        ],
+        "title": "EmploymentType"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Qualification": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "habr_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Habr Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "habr_id"
+        ],
+        "title": "Qualification"
+      },
+      "ReplyInDB": {
+        "properties": {
+          "vacancy_id": {
+            "type": "string",
+            "title": "Vacancy Id"
+          },
+          "applicant_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applicant Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "applicant_avatar": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applicant Avatar"
+          },
+          "applicant_fullname": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applicant Fullname"
+          },
+          "applicant_phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applicant Phone"
+          },
+          "applicant_telegram": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applicant Telegram"
+          },
+          "applicant_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applicant Email"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "updated_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated By"
+          }
+        },
+        "type": "object",
+        "required": [
+          "vacancy_id",
+          "owner_id",
+          "id",
+          "status",
+          "created_at",
+          "updated_at",
+          "updated_by"
+        ],
+        "title": "ReplyInDB"
+      },
+      "ReplyInput": {
+        "properties": {
+          "vacancy_id": {
+            "type": "string",
+            "title": "Vacancy Id"
+          },
+          "applicant_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applicant Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "vacancy_id",
+          "owner_id"
+        ],
+        "title": "ReplyInput"
+      },
+      "SearchStatus": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "habr_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Habr Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "habr_id"
+        ],
+        "title": "SearchStatus"
+      },
+      "Skill": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type"
+          },
+          "qualification_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qualification Id"
+          },
+          "division_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Division Id"
+          },
+          "habr_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Habr Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "qualification_id",
+          "division_id",
+          "habr_id"
+        ],
+        "title": "Skill"
+      },
+      "UserInDB": {
+        "properties": {
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phone"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "role": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Role"
+          },
+          "avatar": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar"
+          },
+          "createdTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdtime"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "name",
+          "phone",
+          "id",
+          "avatar",
+          "createdTime"
+        ],
+        "title": "UserInDB"
+      },
+      "Vacancy": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "salary_from": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Salary From"
+          },
+          "salary_to": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Salary To"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "is_remote": {
+            "type": "boolean",
+            "title": "Is Remote",
+            "default": false
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Описание вакансии"
+          },
+          "team": {
+            "type": "string",
+            "title": "Team",
+            "description": "О компании и команде"
+          },
+          "todo": {
+            "type": "string",
+            "title": "Todo",
+            "description": "Ожидания от кандидата"
+          },
+          "city_id": {
+            "type": "string",
+            "title": "City Id"
+          },
+          "employment_type_id": {
+            "type": "string",
+            "title": "Employment Type Id"
+          },
+          "division_id": {
+            "type": "string",
+            "title": "Division Id"
+          },
+          "qualification_id": {
+            "type": "string",
+            "title": "Qualification Id"
+          },
+          "skill_set": {
+            "type": "string",
+            "title": "Skill Set"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "habr_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Habr Id"
+          },
+          "hh_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hh Id"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "owner_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Owner Id"
+          },
+          "company_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Company Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "currency",
+          "description",
+          "team",
+          "todo",
+          "city_id",
+          "employment_type_id",
+          "division_id",
+          "qualification_id",
+          "skill_set",
+          "id",
+          "created_at",
+          "published_at"
+        ],
+        "title": "Vacancy"
+      },
+      "VacancyForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "salary_from": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Salary From"
+          },
+          "salary_to": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Salary To"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency",
+            "default": "RUR"
+          },
+          "is_remote": {
+            "type": "boolean",
+            "title": "Is Remote",
+            "default": false
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Описание вакансии"
+          },
+          "team": {
+            "type": "string",
+            "title": "Team",
+            "description": "О компании и команде"
+          },
+          "todo": {
+            "type": "string",
+            "title": "Todo",
+            "description": "Ожидания от кандидата"
+          },
+          "city_id": {
+            "type": "string",
+            "title": "City Id"
+          },
+          "employment_type_id": {
+            "type": "string",
+            "title": "Employment Type Id"
+          },
+          "division_id": {
+            "type": "string",
+            "title": "Division Id"
+          },
+          "qualification_id": {
+            "type": "string",
+            "title": "Qualification Id"
+          },
+          "skill_set": {
+            "type": "string",
+            "title": "Skill Set"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "team",
+          "todo",
+          "city_id",
+          "employment_type_id",
+          "division_id",
+          "qualification_id",
+          "skill_set"
+        ],
+        "title": "VacancyForm"
+      },
+      "VacancyListItem": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "salary_from": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Salary From"
+          },
+          "salary_to": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Salary To"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "is_remote": {
+            "type": "boolean",
+            "title": "Is Remote",
+            "default": false
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Описание вакансии"
+          },
+          "team": {
+            "type": "string",
+            "title": "Team",
+            "description": "О компании и команде"
+          },
+          "todo": {
+            "type": "string",
+            "title": "Todo",
+            "description": "Ожидания от кандидата"
+          },
+          "city_id": {
+            "type": "string",
+            "title": "City Id"
+          },
+          "employment_type_id": {
+            "type": "string",
+            "title": "Employment Type Id"
+          },
+          "division_id": {
+            "type": "string",
+            "title": "Division Id"
+          },
+          "qualification_id": {
+            "type": "string",
+            "title": "Qualification Id"
+          },
+          "skill_set": {
+            "type": "string",
+            "title": "Skill Set"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "habr_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Habr Id"
+          },
+          "hh_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hh Id"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "owner_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Owner Id"
+          },
+          "company_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Company Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "currency",
+          "description",
+          "team",
+          "todo",
+          "city_id",
+          "employment_type_id",
+          "division_id",
+          "qualification_id",
+          "skill_set",
+          "id",
+          "created_at",
+          "published_at"
+        ],
+        "title": "VacancyListItem"
+      },
+      "VacancyUpdateForm": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "salary_from": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Salary From"
+          },
+          "salary_to": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Salary To"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency",
+            "default": "RUR"
+          },
+          "is_remote": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Remote",
+            "default": false
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "team": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Team"
+          },
+          "todo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Todo"
+          },
+          "city_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City Id"
+          },
+          "employment_type_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Employment Type Id"
+          },
+          "division_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Division Id"
+          },
+          "qualification_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qualification Id"
+          },
+          "skill_set": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skill Set"
+          }
+        },
+        "type": "object",
+        "title": "VacancyUpdateForm"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
