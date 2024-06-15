@@ -7,7 +7,7 @@
       "name": "IDEV team",
       "email": "info@idev-present.com"
     },
-    "version": "0.9.4"
+    "version": "0.10.2"
   },
   "servers": [
     {
@@ -1126,6 +1126,22 @@
               "type": "string",
               "title": "Vacancy Id"
             }
+          },
+          {
+            "name": "comment",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Comment"
+            }
           }
         ],
         "responses": {
@@ -1134,7 +1150,91 @@
             "content": {
               "application/json": {
                 "schema": {
-
+                  "$ref": "#/components/schemas/Reply"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vacancy/{vacancy_id}/publish": {
+      "get": {
+        "tags": [
+          "vacancy"
+        ],
+        "summary": "Publish Vacancy",
+        "operationId": "publish_vacancy_vacancy__vacancy_id__publish_get",
+        "parameters": [
+          {
+            "name": "vacancy_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Vacancy Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vacancy"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vacancy/{vacancy_id}/unpublish": {
+      "get": {
+        "tags": [
+          "vacancy"
+        ],
+        "summary": "Unpublish Vacancy",
+        "operationId": "unpublish_vacancy_vacancy__vacancy_id__unpublish_get",
+        "parameters": [
+          {
+            "name": "vacancy_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Vacancy Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vacancy"
                 }
               }
             }
@@ -1441,17 +1541,77 @@
         ],
         "summary": "Reply List",
         "operationId": "reply_list_reply__get",
+        "parameters": [
+          {
+            "name": "applicant_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Applicant Id"
+            }
+          },
+          {
+            "name": "vacancy_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Vacancy Id"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
+                  "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Reply"
                   },
-                  "type": "array",
                   "title": "Response Reply List Reply  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -1680,6 +1840,52 @@
                     "$ref": "#/components/schemas/ReplyCommentInDB"
                   },
                   "title": "Response Get Reply Comments Reply  Reply Id  Comments Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reply/{vacancy_id}/count": {
+      "get": {
+        "tags": [
+          "reply"
+        ],
+        "summary": "Reply Count By Status",
+        "operationId": "reply_count_by_status_reply__vacancy_id__count_get",
+        "parameters": [
+          {
+            "name": "vacancy_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Vacancy Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReplyStatusCount"
+                  },
+                  "title": "Response Reply Count By Status Reply  Vacancy Id  Count Get"
                 }
               }
             }
@@ -3289,6 +3495,18 @@
             "title": "Owner Id",
             "description": "ID Рекрутера"
           },
+          "user_comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Comment",
+            "description": "Комментарий соискателя"
+          },
           "id": {
             "type": "string",
             "format": "uuid",
@@ -3297,6 +3515,18 @@
           "status": {
             "type": "string",
             "title": "Status"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason",
+            "description": "Причина изменения статуса"
           },
           "vacancy_name": {
             "anyOf": [
@@ -3488,6 +3718,24 @@
           "created_at"
         ],
         "title": "ReplyCommentInDB"
+      },
+      "ReplyStatusCount": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "count"
+        ],
+        "title": "ReplyStatusCount"
       },
       "ReplyStatusFlow": {
         "properties": {
