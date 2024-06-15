@@ -1,0 +1,79 @@
+# C4 Container
+
+Уровень контейнеров служит для описания высокоуровневой структуры системы. Контейнеры представляют собою раздельные приложения, службы или базы данных, которые работают вместе для реализации системы.
+
+## Glossary
+
+Список определений или глоссарий:
+
+Person
+: Участник системы имеюший доступ к админскому приложению
+
+System
+: Админское приложение.
+
+External Person
+: Участник системы имеющий доступ к клиентскому приложению.
+
+External System
+: Внешние системы.
+
+## Схема
+```plantuml
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+' Uncomment the following line and comment the first to use locally
+' !include C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title C4 Container для системы "Skillometer"
+
+Person(customer, "Рекрутер", "Пользователь системы с персональным аккаунтом.")
+Person_Ext(user, "Соискатель", "Пользователь Телеграм.")
+
+System_Boundary(skillometer_system, "Система Skillometer") {
+    Container(web_app, "Веб-приложение", "React", "Пользовательский интерфейс для рекрутеров")
+    Container(api, "API", "Node.js", "Обрабатывает запросы от всех пользователей и взаимодействует с внешними системами")
+    Container(db, "База данных", "PostgreSQL", "Хранит данные о вакансиях, резюме и пользователях")
+    Container(notifications, "Модуль уведомлений", "Node.js", "Отправляет уведомления пользователям")
+    Container(google_integration, "Интеграция с Google Календарем", "Node.js", "Обеспечивает взаимодействие с Google Календарем")
+    Container(telegram_integration, "Интеграция с Telegram", "Node.js", "Обеспечивает взаимодействие с Telegram клиентом")
+    Container(gpt_integration, "Интеграция с чат GPT", "Node.js", "Обмен данными с чат GPT для редактирования резюме")
+    Container(s3_integration, "Интеграция с хранилищем S3", "Node.js", "Хранение документов (резюме)")
+
+    Container(habr_integration, "Интеграция с Habr", "Node.js", "Получение данных из Habr")
+    Container(headhunter_integration, "Интеграция с HeadHunter", "Node.js", "Получение данных из HeadHunter")
+    Container(reksoft_integration, "Интеграция с Reksoft", "Node.js", "Получение данных из Reksoft")
+}
+
+System_Ext(smtp, "SMTP", "Служит для отправки уведомлений участвующим лицам процесса")
+System_Ext(telegram, "Telegram", "Система задействована как клиентское приложение")
+System_Ext(google, "Google Календарь", "Сервис планирования и организации времени, который используется для управления рабочим графиком рекрутера и назначения встреч с соискателями")
+System_Ext(habr, "Habr карьера", "Система из которой получаем актуальные вакансии")
+System_Ext(headhunter, "HeadHunter", "Система из которой получаем актуальные вакансии")
+System_Ext(reksoft, "Reksoft", "ATS система, система из которой получаем актуальные вакансии, в дальнейшем как админское приложение")
+System_Ext(gpt, "чат GPT", "ИИ для помощи в редактировании резюме")
+System_Ext(s3, "Хранилище S3", "Система используемая для хранения документов (резюме)")
+
+Rel(customer, web_app, "Использует")
+Rel_Back(customer, smtp, "Отправляет e-mails на")
+Rel_Back(user, smtp, "Отправляет e-mails на")
+Rel_Back(notifications, smtp, "Отправляет e-mails на")
+BiRel(api, telegram_integration, "Обмен данными")
+Rel(user, telegram, "Использует")
+Rel_Back(user, telegram, "Отображает информацию")
+Rel(habr_integration, habr, "Получает данные из")
+Rel(headhunter_integration, headhunter, "Получает данные из")
+Rel(reksoft_integration, reksoft, "Получает данные из")
+BiRel(api, google_integration, "Обмен данными")
+BiRel(api, gpt_integration, "Обмен данными")
+BiRel(api, s3_integration, "Обмен данными")
+Rel(api, db, "Читает из и пишет в")
+Rel(api, habr_integration, "Запрашивает данные")
+Rel(api, headhunter_integration, "Запрашивает данные")
+Rel(api, reksoft_integration, "Запрашивает данные")
+Rel(web_app, api, "Отправляет запросы к")
+
+@enduml
+```

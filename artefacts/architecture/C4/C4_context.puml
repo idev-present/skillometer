@@ -5,7 +5,7 @@
 
 LAYOUT_WITH_LEGEND()
 
-title C4 Context системы "Skillometer"
+title C4 Context системы Skillometer
 
 Person(customer, "Рекрутер", "Пользователь системы с персональным аккаунтом.")
 Person_Ext(user, "Соискатель", "Пользователь Телеграм.")
