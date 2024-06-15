@@ -1,3 +1,52 @@
 # Status System
 
-Start typing here...
+## Схема
+```plantuml
+@startuml
+start
+
+#LightBlue :Новый;
+note right: Этап 1 - Первичный
+#LightBlue:Проверка резюме;
+
+if (Подходит ли резюме?) then (Да)
+  #LightBlue :Первичное собеседование;
+  note right: Этап 2 - HR
+  if (Пройдено ли первичное собеседование?) then (Да)
+    #LightBlue :Селекция кандидатов;
+    note right: Этап 3 - Селекция
+    if (Выбран ли кандидат?) then (Да)
+      #LightBlue :Собеседование;
+      note right: Этап 4 - Техническое интервью
+      if (Пройдено ли техническое собеседование?) then (Да)
+        #LightBlue :Техническое задание;
+        note right: Этап 5 - Задание
+        if (Пройдено ли техническое задание?) then (Да)
+          note right: Этап 6 - Предложение
+          #LightBlue :Ожидание;
+          #LightBlue :Выставлен оффер;
+          if (Принят ли оффер?) then (Да)
+            #LightBlue :Оффер принят;
+            #LightBlue :Резерв;
+            else (Нет)
+            #LightBlue :Отказ;
+          endif
+        else (Нет)
+          #LightBlue :Отказ;
+        endif
+      else (Нет)
+        #LightBlue:Отказ;
+      endif
+    else (Нет)
+      #LightBlue:Отказ;
+    endif
+  else (Нет)
+    #LightBlue:Отказ;
+  endif
+else (Нет)
+  #LightBlue:Отказ;
+endif
+
+stop
+@enduml
+```
