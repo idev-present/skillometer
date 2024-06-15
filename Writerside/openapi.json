@@ -1,13 +1,13 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Skillometer API",
+    "title": "Skillometer",
     "description": "Service for recruiters and applicants",
     "contact": {
       "name": "IDEV team",
       "email": "info@idev-present.com"
     },
-    "version": "0.1.0"
+    "version": "0.9.4"
   },
   "servers": [
     {
@@ -15,6 +15,698 @@
     }
   ],
   "paths": {
+    "/user/auth/callback": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Auth Callback",
+        "operationId": "auth_callback_user_auth_callback_post",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Code"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/profile": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get User Profile",
+        "operationId": "get_user_profile_user_profile_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update User Profile",
+        "operationId": "update_user_profile_user_profile_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/user/applicant_info": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get Applicant Info",
+        "operationId": "get_applicant_info_user_applicant_info_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Applicant"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update Applicant Info",
+        "operationId": "update_applicant_info_user_applicant_info_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicantUpdateForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Applicant"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/user/contacts": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get Contacts",
+        "operationId": "get_contacts_user_contacts_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserContacts"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update Contacts",
+        "operationId": "update_contacts_user_contacts_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserContacts"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserContacts"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/user/education": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get Education Info",
+        "operationId": "get_education_info_user_education_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ApplicantEducation"
+                  },
+                  "type": "array",
+                  "title": "Response Get Education Info User Education Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create Education Info",
+        "operationId": "create_education_info_user_education_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicantEducationForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicantEducation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/user/education/{education_item_id}": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update Education Info",
+        "operationId": "update_education_info_user_education__education_item_id__put",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "education_item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Education Item Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicantEducationUpdateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicantEducation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete Education Info",
+        "operationId": "delete_education_info_user_education__education_item_id__delete",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "education_item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Education Item Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/work_xp": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get Work Xp List",
+        "operationId": "get_work_xp_list_user_work_xp_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ApplicantXP"
+                  },
+                  "type": "array",
+                  "title": "Response Get Work Xp List User Work Xp Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create Work Xp",
+        "operationId": "create_work_xp_user_work_xp_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicantXPForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicantXPForm"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/user/work_xp/{xp_id}": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update Work Xp",
+        "operationId": "update_work_xp_user_work_xp__xp_id__put",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "xp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Xp Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicantXPUpdateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicantXPForm"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete Work Xp",
+        "operationId": "delete_work_xp_user_work_xp__xp_id__delete",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "xp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Xp Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/cv": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get Cv",
+        "operationId": "get_cv_user_cv_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CV"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/user/reply/history": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get User Replies History",
+        "operationId": "get_user_replies_history_user_reply_history_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Reply"
+                  },
+                  "type": "array",
+                  "title": "Response Get User Replies History User Reply History Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
     "/dict/currency": {
       "get": {
         "tags": [
@@ -29,7 +721,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Currency"
+                    "$ref": "#/components/schemas/KeyValueDict"
                   },
                   "type": "array",
                   "title": "Response Get Currency List Dict Currency Get"
@@ -183,6 +875,31 @@
                   },
                   "type": "array",
                   "title": "Response Skill List Dict Skill Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/reply_status": {
+      "get": {
+        "tags": [
+          "dict"
+        ],
+        "summary": "Reply Status List",
+        "operationId": "reply_status_list_dict_reply_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValueDict"
+                  },
+                  "type": "array",
+                  "title": "Response Reply Status List Dict Reply Status Get"
                 }
               }
             }
@@ -386,6 +1103,55 @@
         }
       }
     },
+    "/vacancy/{vacancy_id}/reply": {
+      "post": {
+        "tags": [
+          "vacancy"
+        ],
+        "summary": "Vacancy Reply",
+        "operationId": "vacancy_reply_vacancy__vacancy_id__reply_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vacancy_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Vacancy Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/company/": {
       "get": {
         "tags": [
@@ -400,70 +1166,6 @@
               "application/json": {
                 "schema": {
 
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/applicant/": {
-      "get": {
-        "tags": [
-          "applicant"
-        ],
-        "summary": "Applicant List",
-        "operationId": "applicant_list_applicant__get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ApplicantListItem"
-                  },
-                  "type": "array",
-                  "title": "Response Applicant List Applicant  Get"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "applicant"
-        ],
-        "summary": "Create Applicant",
-        "operationId": "create_applicant_applicant__post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ApplicantForm"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Applicant"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -603,13 +1305,13 @@
         }
       }
     },
-    "/reply/": {
+    "/applicant/": {
       "get": {
         "tags": [
-          "reply"
+          "applicant"
         ],
-        "summary": "Reply List",
-        "operationId": "reply_list_reply__get",
+        "summary": "Applicant List",
+        "operationId": "applicant_list_applicant__get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -617,31 +1319,54 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ReplyInDB"
+                    "$ref": "#/components/schemas/ApplicantListItem"
                   },
                   "type": "array",
-                  "title": "Response Reply List Reply  Get"
+                  "title": "Response Applicant List Applicant  Get"
                 }
               }
             }
           }
         }
-      },
-      "post": {
+      }
+    },
+    "/applicant/upload/{applicant_id}": {
+      "put": {
         "tags": [
-          "reply"
+          "applicant"
         ],
-        "summary": "Create",
-        "operationId": "create_reply__post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ReplyInput"
-              }
+        "summary": "Upload Resume",
+        "operationId": "upload_resume_applicant_upload__applicant_id__put",
+        "parameters": [
+          {
+            "name": "applicant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Applicant Id"
             }
           },
-          "required": true
+          {
+            "name": "bucket",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "resume",
+              "title": "Bucket"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_resume_applicant_upload__applicant_id__put"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
@@ -649,7 +1374,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplyInDB"
+
                 }
               }
             }
@@ -667,22 +1392,21 @@
         }
       }
     },
-    "/user/auth": {
+    "/applicant/download/{applicant_id}": {
       "get": {
         "tags": [
-          "user"
+          "applicant"
         ],
-        "summary": "Auth",
-        "operationId": "auth_user_auth_get",
+        "summary": "Download Resume",
+        "operationId": "download_resume_applicant_download__applicant_id__get",
         "parameters": [
           {
-            "name": "state",
-            "in": "query",
-            "required": false,
+            "name": "applicant_id",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "string",
-              "default": "docs",
-              "title": "State"
+              "title": "Applicant Id"
             }
           }
         ],
@@ -710,20 +1434,24 @@
         }
       }
     },
-    "/user/me": {
+    "/reply/": {
       "get": {
         "tags": [
-          "user"
+          "reply"
         ],
-        "summary": "Me",
-        "operationId": "me_user_me_get",
+        "summary": "Reply List",
+        "operationId": "reply_list_reply__get",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserInDB"
+                  "items": {
+                    "$ref": "#/components/schemas/Reply"
+                  },
+                  "type": "array",
+                  "title": "Response Reply List Reply  Get"
                 }
               }
             }
@@ -731,13 +1459,315 @@
         }
       }
     },
-    "/user/logout": {
+    "/reply/{reply_id}": {
+      "get": {
+        "tags": [
+          "reply"
+        ],
+        "summary": "Get Reply",
+        "operationId": "get_reply_reply__reply_id__get",
+        "parameters": [
+          {
+            "name": "reply_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Reply Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reply"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reply/{reply_id}/status": {
+      "get": {
+        "tags": [
+          "reply"
+        ],
+        "summary": "Get Reply Next Status Flow",
+        "operationId": "get_reply_next_status_flow_reply__reply_id__status_get",
+        "parameters": [
+          {
+            "name": "reply_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Reply Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReplyStatusFlow"
+                  },
+                  "title": "Response Get Reply Next Status Flow Reply  Reply Id  Status Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
-          "user"
+          "reply"
         ],
-        "summary": "Logout",
-        "operationId": "logout_user_logout_post",
+        "summary": "Set Reply Status",
+        "operationId": "set_reply_status_reply__reply_id__status_post",
+        "parameters": [
+          {
+            "name": "reply_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Reply Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplyUpdateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reply/{reply_id}/comments": {
+      "post": {
+        "tags": [
+          "reply"
+        ],
+        "summary": "Reply Comment Create",
+        "operationId": "reply_comment_create_reply__reply_id__comments_post",
+        "parameters": [
+          {
+            "name": "reply_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Reply Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplyCommentForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReplyCommentInDB"
+                  },
+                  "title": "Response Reply Comment Create Reply  Reply Id  Comments Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "reply"
+        ],
+        "summary": "Get Reply Comments",
+        "operationId": "get_reply_comments_reply__reply_id__comments_get",
+        "parameters": [
+          {
+            "name": "reply_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Reply Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReplyCommentInDB"
+                  },
+                  "title": "Response Get Reply Comments Reply  Reply Id  Comments Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cv/": {
+      "get": {
+        "tags": [
+          "cv"
+        ],
+        "summary": "Get User Cv",
+        "operationId": "get_user_cv_cv__get",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "applicant_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Applicant Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CV"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/config": {
+      "get": {
+        "summary": "Show Settings",
+        "operationId": "show_settings_config_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/test": {
+      "get": {
+        "summary": "Debug Endpoint",
+        "operationId": "debug_endpoint_test_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -757,22 +1787,21 @@
     "schemas": {
       "Applicant": {
         "properties": {
-          "title": {
-            "type": "string",
-            "title": "Title"
-          },
           "salary_from": {
             "type": "integer",
             "exclusiveMinimum": 0.0,
             "title": "Salary From"
           },
           "currency": {
-            "$ref": "#/components/schemas/Currency"
-          },
-          "age": {
-            "type": "integer",
-            "exclusiveMinimum": 0.0,
-            "title": "Age"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KeyValueDict"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Код валюты"
           },
           "is_relocation": {
             "anyOf": [
@@ -861,19 +1890,8 @@
           },
           "user_id": {
             "type": "string",
+            "format": "uuid",
             "title": "User Id"
-          },
-          "experience": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Experience",
-            "description": "Суммарный опыт работы, калькулируется из списка"
           },
           "last_visited": {
             "anyOf": [
@@ -900,31 +1918,46 @@
             ],
             "title": "Registered At",
             "description": "Дата/время регистрации"
+          },
+          "experience": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Experience",
+            "description": "Суммарный опыт работы, калькулируется из списка"
+          },
+          "age": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Age"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
           }
         },
         "type": "object",
         "required": [
-          "title",
           "salary_from",
-          "currency",
-          "age",
           "id",
-          "user_id"
+          "user_id",
+          "age",
+          "title"
         ],
         "title": "Applicant"
       },
-      "ApplicantForm": {
+      "ApplicantEducation": {
         "properties": {
-          "title": {
+          "university_name": {
             "type": "string",
-            "title": "Title"
+            "title": "Name of the university"
           },
-          "salary_from": {
-            "type": "integer",
-            "exclusiveMinimum": 0.0,
-            "title": "Salary From"
-          },
-          "currency": {
+          "university_id": {
             "anyOf": [
               {
                 "type": "string"
@@ -933,41 +1966,13 @@
                 "type": "null"
               }
             ],
-            "title": "Currency",
-            "default": "RUR"
+            "title": "The unique identifier of the university"
           },
-          "age": {
-            "type": "integer",
-            "exclusiveMinimum": 0.0,
-            "title": "Age"
+          "faculty_name": {
+            "type": "string",
+            "title": "Name of the faculty"
           },
-          "is_relocation": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Is Relocation",
-            "description": "Готовность к переезду",
-            "default": false
-          },
-          "is_remote": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Is Remote",
-            "description": "Готовность к удаленной работе",
-            "default": false
-          },
-          "search_status_id": {
+          "faculty_id": {
             "anyOf": [
               {
                 "type": "string"
@@ -976,29 +1981,7 @@
                 "type": "null"
               }
             ],
-            "title": "Search Status Id"
-          },
-          "qualification_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Qualification Id"
-          },
-          "division_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Division Id"
+            "title": "The unique identifier of the faculty"
           },
           "city_id": {
             "anyOf": [
@@ -1009,9 +1992,26 @@
                 "type": "null"
               }
             ],
-            "title": "City Id"
+            "title": "The unique identifier of the city where the university is located"
           },
-          "skill_set": {
+          "start_date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start date of education"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End date of education"
+          },
+          "specialization": {
             "anyOf": [
               {
                 "type": "string"
@@ -1020,35 +2020,220 @@
                 "type": "null"
               }
             ],
-            "title": "Skill Set"
+            "title": "Education specialization"
+          },
+          "id": {
+            "type": "string",
+            "title": "The unique identifier"
+          },
+          "applicant_id": {
+            "type": "string",
+            "title": "The unique identifier of the applicant"
           }
         },
         "type": "object",
         "required": [
-          "title",
-          "salary_from",
-          "age"
+          "university_name",
+          "faculty_name",
+          "start_date",
+          "id",
+          "applicant_id"
         ],
-        "title": "ApplicantForm"
+        "title": "ApplicantEducation"
+      },
+      "ApplicantEducationForm": {
+        "properties": {
+          "university_name": {
+            "type": "string",
+            "title": "Name of the university"
+          },
+          "university_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "The unique identifier of the university"
+          },
+          "faculty_name": {
+            "type": "string",
+            "title": "Name of the faculty"
+          },
+          "faculty_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "The unique identifier of the faculty"
+          },
+          "city_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "The unique identifier of the city where the university is located"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start date of education"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End date of education"
+          },
+          "specialization": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Education specialization"
+          }
+        },
+        "type": "object",
+        "required": [
+          "university_name",
+          "faculty_name",
+          "start_date"
+        ],
+        "title": "ApplicantEducationForm"
+      },
+      "ApplicantEducationUpdateForm": {
+        "properties": {
+          "university_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name of the university"
+          },
+          "university_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "The unique identifier of the university"
+          },
+          "faculty_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name of the faculty"
+          },
+          "faculty_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "The unique identifier of the faculty"
+          },
+          "city_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "The unique identifier of the city where the university is located"
+          },
+          "start_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start date of education"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End date of education"
+          },
+          "specialization": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Education specialization"
+          }
+        },
+        "type": "object",
+        "title": "ApplicantEducationUpdateForm"
       },
       "ApplicantListItem": {
         "properties": {
-          "title": {
-            "type": "string",
-            "title": "Title"
-          },
           "salary_from": {
             "type": "integer",
             "exclusiveMinimum": 0.0,
             "title": "Salary From"
           },
           "currency": {
-            "$ref": "#/components/schemas/Currency"
-          },
-          "age": {
-            "type": "integer",
-            "exclusiveMinimum": 0.0,
-            "title": "Age"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KeyValueDict"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Код валюты"
           },
           "is_relocation": {
             "anyOf": [
@@ -1137,19 +2322,8 @@
           },
           "user_id": {
             "type": "string",
+            "format": "uuid",
             "title": "User Id"
-          },
-          "experience": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Experience",
-            "description": "Суммарный опыт работы, калькулируется из списка"
           },
           "last_visited": {
             "anyOf": [
@@ -1176,32 +2350,41 @@
             ],
             "title": "Registered At",
             "description": "Дата/время регистрации"
+          },
+          "experience": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Experience",
+            "description": "Суммарный опыт работы, калькулируется из списка"
+          },
+          "age": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Age"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
           }
         },
         "type": "object",
         "required": [
-          "title",
           "salary_from",
-          "currency",
-          "age",
           "id",
-          "user_id"
+          "user_id",
+          "age",
+          "title"
         ],
         "title": "ApplicantListItem"
       },
       "ApplicantUpdateForm": {
         "properties": {
-          "title": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Title"
-          },
           "salary_from": {
             "anyOf": [
               {
@@ -1224,17 +2407,6 @@
             ],
             "title": "Currency",
             "default": "RUR"
-          },
-          "age": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Age"
           },
           "is_relocation": {
             "anyOf": [
@@ -1321,8 +2493,545 @@
         "type": "object",
         "title": "ApplicantUpdateForm"
       },
+      "ApplicantXP": {
+        "properties": {
+          "company_name": {
+            "type": "string",
+            "title": "Name of the company"
+          },
+          "company_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "The unique identifier of the company"
+          },
+          "position": {
+            "type": "string",
+            "title": "Position held at the company"
+          },
+          "position_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "The unique identifier of the position"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start date of the position"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End date of the position"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description of position and responsibilities"
+          },
+          "skill_set": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skills applied in the position"
+          },
+          "id": {
+            "type": "string",
+            "title": "The unique identifier of the experience"
+          },
+          "applicant_id": {
+            "type": "string",
+            "maxLength": 50,
+            "title": "The unique identifier of the applicant"
+          }
+        },
+        "type": "object",
+        "required": [
+          "company_name",
+          "position",
+          "start_date",
+          "id",
+          "applicant_id"
+        ],
+        "title": "ApplicantXP"
+      },
+      "ApplicantXPForm": {
+        "properties": {
+          "company_name": {
+            "type": "string",
+            "title": "Name of the company"
+          },
+          "company_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "The unique identifier of the company"
+          },
+          "position": {
+            "type": "string",
+            "title": "Position held at the company"
+          },
+          "position_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "The unique identifier of the position"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start date of the position"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End date of the position"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description of position and responsibilities"
+          },
+          "skill_set": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skills applied in the position"
+          }
+        },
+        "type": "object",
+        "required": [
+          "company_name",
+          "position",
+          "start_date"
+        ],
+        "title": "ApplicantXPForm"
+      },
+      "ApplicantXPUpdateForm": {
+        "properties": {
+          "company_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name of the company"
+          },
+          "company_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "The unique identifier of the company"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position held at the company"
+          },
+          "position_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "The unique identifier of the position"
+          },
+          "start_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start date of the position"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End date of the position"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description of position and responsibilities"
+          },
+          "skill_set": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skills applied in the position"
+          }
+        },
+        "type": "object",
+        "title": "ApplicantXPUpdateForm"
+      },
+      "Body_upload_resume_applicant_upload__applicant_id__put": {
+        "properties": {
+          "data": {
+            "type": "string",
+            "format": "binary",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Body_upload_resume_applicant_upload__applicant_id__put"
+      },
+      "CV": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "login": {
+            "type": "string",
+            "title": "Login"
+          },
+          "avatar": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar"
+          },
+          "phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phone"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio"
+          },
+          "salary_from": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Salary From"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency"
+          },
+          "is_relocation": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Relocation"
+          },
+          "is_remote": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Remote"
+          },
+          "search_status_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Search Status Id"
+          },
+          "qualification_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qualification Id"
+          },
+          "division_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Division Id"
+          },
+          "city_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City Id"
+          },
+          "skill_set": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skill Set"
+          },
+          "experience": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Experience"
+          },
+          "age": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Age"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "registered_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registered At"
+          },
+          "last_visited": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Visited"
+          },
+          "xp": {
+            "items": {
+              "$ref": "#/components/schemas/ApplicantXP"
+            },
+            "type": "array",
+            "title": "Xp"
+          },
+          "education": {
+            "items": {
+              "$ref": "#/components/schemas/ApplicantEducation"
+            },
+            "type": "array",
+            "title": "Education"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "login",
+          "avatar",
+          "phone",
+          "email",
+          "bio",
+          "salary_from",
+          "currency",
+          "is_relocation",
+          "is_remote",
+          "search_status_id",
+          "qualification_id",
+          "division_id",
+          "city_id",
+          "skill_set",
+          "experience",
+          "age",
+          "title",
+          "registered_at",
+          "last_visited",
+          "xp",
+          "education"
+        ],
+        "title": "CV"
+      },
       "City": {
         "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
           "fias_id": {
             "anyOf": [
               {
@@ -1392,6 +3101,7 @@
         },
         "type": "object",
         "required": [
+          "id",
           "fias_id",
           "habr_id",
           "habr_alias",
@@ -1400,24 +3110,6 @@
           "region_name"
         ],
         "title": "City"
-      },
-      "Currency": {
-        "properties": {
-          "key": {
-            "type": "string",
-            "title": "Key"
-          },
-          "value": {
-            "type": "string",
-            "title": "Value"
-          }
-        },
-        "type": "object",
-        "required": [
-          "key",
-          "value"
-        ],
-        "title": "Currency"
       },
       "Division": {
         "properties": {
@@ -1518,6 +3210,24 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
+      "KeyValueDict": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "title": "KeyValueDict"
+      },
       "Qualification": {
         "properties": {
           "id": {
@@ -1555,13 +3265,19 @@
         ],
         "title": "Qualification"
       },
-      "ReplyInDB": {
+      "Reply": {
         "properties": {
           "vacancy_id": {
             "type": "string",
-            "title": "Vacancy Id"
+            "title": "Vacancy Id",
+            "description": "ID Вакансии"
           },
           "applicant_id": {
+            "type": "string",
+            "title": "Applicant Id",
+            "description": "ID Соискателя"
+          },
+          "owner_id": {
             "anyOf": [
               {
                 "type": "string"
@@ -1570,11 +3286,8 @@
                 "type": "null"
               }
             ],
-            "title": "Applicant Id"
-          },
-          "owner_id": {
-            "type": "string",
-            "title": "Owner Id"
+            "title": "Owner Id",
+            "description": "ID Рекрутера"
           },
           "id": {
             "type": "string",
@@ -1584,6 +3297,18 @@
           "status": {
             "type": "string",
             "title": "Status"
+          },
+          "vacancy_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vacancy Name",
+            "description": "Название вакансии"
           },
           "applicant_avatar": {
             "anyOf": [
@@ -1641,13 +3366,27 @@
             "title": "Applicant Email"
           },
           "created_at": {
-            "type": "string",
-            "format": "date-time",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Created At"
           },
           "updated_at": {
-            "type": "string",
-            "format": "date-time",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Updated At"
           },
           "updated_by": {
@@ -1660,27 +3399,8 @@
               }
             ],
             "title": "Updated By"
-          }
-        },
-        "type": "object",
-        "required": [
-          "vacancy_id",
-          "owner_id",
-          "id",
-          "status",
-          "created_at",
-          "updated_at",
-          "updated_by"
-        ],
-        "title": "ReplyInDB"
-      },
-      "ReplyInput": {
-        "properties": {
-          "vacancy_id": {
-            "type": "string",
-            "title": "Vacancy Id"
           },
-          "applicant_id": {
+          "updated_by_role": {
             "anyOf": [
               {
                 "type": "string"
@@ -1689,19 +3409,138 @@
                 "type": "null"
               }
             ],
-            "title": "Applicant Id"
-          },
-          "owner_id": {
-            "type": "string",
-            "title": "Owner Id"
+            "title": "Updated By Role"
           }
         },
         "type": "object",
         "required": [
           "vacancy_id",
-          "owner_id"
+          "applicant_id",
+          "id",
+          "status",
+          "created_at",
+          "updated_at",
+          "updated_by",
+          "updated_by_role"
         ],
-        "title": "ReplyInput"
+        "title": "Reply"
+      },
+      "ReplyCommentForm": {
+        "properties": {
+          "author_id": {
+            "type": "string",
+            "title": "Author Id"
+          },
+          "author_name": {
+            "type": "string",
+            "title": "Author Name"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          }
+        },
+        "type": "object",
+        "required": [
+          "author_id",
+          "author_name",
+          "content"
+        ],
+        "title": "ReplyCommentForm"
+      },
+      "ReplyCommentInDB": {
+        "properties": {
+          "author_id": {
+            "type": "string",
+            "title": "Author Id"
+          },
+          "author_name": {
+            "type": "string",
+            "title": "Author Name"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "reply_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Reply Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "author_id",
+          "author_name",
+          "content",
+          "id",
+          "reply_id",
+          "created_at"
+        ],
+        "title": "ReplyCommentInDB"
+      },
+      "ReplyStatusFlow": {
+        "properties": {
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KeyValueDict"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "is_required_reason": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Required Reason",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ReplyStatusFlow"
+      },
+      "ReplyUpdateForm": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason",
+            "description": "Причина изменения статуса"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "ReplyUpdateForm"
       },
       "SearchStatus": {
         "properties": {
@@ -1827,55 +3666,40 @@
         ],
         "title": "Skill"
       },
-      "UserInDB": {
+      "TokenResponse": {
         "properties": {
-          "email": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Email"
-          },
-          "name": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Name"
-          },
-          "phone": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Phone"
-          },
-          "id": {
+          "access_token": {
             "type": "string",
-            "title": "Id"
+            "title": "Access Token"
           },
-          "role": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Role"
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type"
+          },
+          "expires_in": {
+            "type": "integer",
+            "title": "Expires In"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token",
+          "refresh_token",
+          "token_type",
+          "expires_in"
+        ],
+        "title": "TokenResponse"
+      },
+      "User": {
+        "properties": {
+          "login": {
+            "type": "string",
+            "title": "Login",
+            "description": "Username used to log in"
           },
           "avatar": {
             "anyOf": [
@@ -1886,24 +3710,308 @@
                 "type": "null"
               }
             ],
-            "title": "Avatar"
+            "title": "Avatar",
+            "description": "A link to the user's avatar picture"
           },
-          "createdTime": {
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "male",
+                  "female"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender",
+            "description": "The user's gender"
+          },
+          "first_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Name",
+            "description": "The user's first name"
+          },
+          "last_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Name",
+            "description": "The user's last name"
+          },
+          "birthday": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Birthday",
+            "description": "The user's birthday"
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City",
+            "description": "The user's hometown or current city of residence"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio",
+            "description": "A short description or biography of the user"
+          },
+          "id": {
             "type": "string",
-            "format": "date-time",
-            "title": "Createdtime"
+            "format": "uuid",
+            "title": "Id",
+            "description": "The unique identifier for the user"
+          },
+          "full_name": {
+            "type": "string",
+            "title": "Full Name",
+            "description": "The user's full name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role",
+            "description": "The user's role in the system"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email",
+            "description": "The user's email address"
+          },
+          "country_code": {
+            "type": "string",
+            "title": "Country Code",
+            "description": "The user's country code",
+            "default": "RU"
+          },
+          "phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phone",
+            "description": "The user's phone number"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At"
           }
         },
         "type": "object",
         "required": [
-          "email",
-          "name",
-          "phone",
+          "login",
           "id",
-          "avatar",
-          "createdTime"
+          "full_name",
+          "role",
+          "email"
         ],
-        "title": "UserInDB"
+        "title": "User"
+      },
+      "UserContacts": {
+        "properties": {
+          "phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phone",
+            "description": "The user's phone number"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email",
+            "description": "The user's email address"
+          }
+        },
+        "type": "object",
+        "title": "UserContacts"
+      },
+      "UserUpdateForm": {
+        "properties": {
+          "login": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Login",
+            "description": "Username used to log in"
+          },
+          "avatar": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar",
+            "description": "A link to the user's avatar picture"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "male",
+                  "female"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender",
+            "description": "The user's gender"
+          },
+          "first_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Name",
+            "description": "The user's first name"
+          },
+          "last_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Name",
+            "description": "The user's last name"
+          },
+          "birthday": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Birthday",
+            "description": "The user's birthday"
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City",
+            "description": "The user's hometown or current city of residence"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio",
+            "description": "A short description or biography of the user"
+          }
+        },
+        "type": "object",
+        "title": "UserUpdateForm"
       },
       "Vacancy": {
         "properties": {
@@ -1934,7 +4042,7 @@
             "title": "Salary To"
           },
           "currency": {
-            "$ref": "#/components/schemas/Currency"
+            "$ref": "#/components/schemas/KeyValueDict"
           },
           "is_remote": {
             "type": "boolean",
@@ -2202,7 +4310,7 @@
             "title": "Salary To"
           },
           "currency": {
-            "$ref": "#/components/schemas/Currency"
+            "$ref": "#/components/schemas/KeyValueDict"
           },
           "is_remote": {
             "type": "boolean",
@@ -2529,6 +4637,12 @@
           "type"
         ],
         "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   }

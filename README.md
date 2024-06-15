@@ -2,7 +2,10 @@
 
 ![made_by](https://img.shields.io/badge/made_by-IDEV-0d9488.svg?style=flat-square)
 
-## Parts
+## Documentation
+- [Documentation](https://idev-present.github.io/skillometer)
+
+## Source code repository
 
 - [root](https://github.com/idev-present/skillometer)
 - [API](https://github.com/idev-present/skillometer-api)
