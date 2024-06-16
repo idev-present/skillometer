@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: cloudflare
+  namespace: skillometer
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: ichirozcom@gmail.com
+    privateKeySecretRef:
+      name: cloudflare-key
+    solvers:
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-api-cred
+              key: api-token

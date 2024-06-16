@@ -1,0 +1,8 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: idev-ip-pool
+  namespace: skillometer
+spec:
+  addresses:
+  - 95.174.89.12/32 # Public IP sber-skillometer worker

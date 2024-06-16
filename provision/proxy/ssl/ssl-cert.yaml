@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-skillometer-idev-present-com
+  namespace: skillometer
+spec:
+  secretName: wildcard-skillometer-idev-present-com-tls
+  dnsNames:
+    - "skillometer.idev-present.com"
+    - "*.skillometer.idev-present.com"
+  issuerRef:
+    name: cloudflare
+    kind: Issuer
+    group: cert-manager.io
