@@ -1,6 +1,7 @@
 # Update Applicant
 
-<!-- Use the <api-doc> element to specify a group of endpoints with a certain tag.
-Open the Writerside review to the right to see the result. -->
+### Метод: PUT /applicant/{applicant_id}
+#### Описание:
+Метод предназначен для обновления информации о соискателе по его идентификатору.
 
 <api-endpoint openapi-path="../openapi.json" endpoint="/applicant/{applicant_id}" method="put"/>

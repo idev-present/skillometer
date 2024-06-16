@@ -1,6 +1,7 @@
 # Delete Vacancy
 
-<!-- Use the <api-doc> element to specify a group of endpoints with a certain tag.
-Open the Writerside review to the right to see the result. -->
+### Метод: DELETE /vacancy/{vacancy_id}
+#### Описание:
+Метод предназначен для удаления вакансии по её идентификатору.
 
 <api-endpoint openapi-path="../openapi.json" endpoint="/vacancy/{vacancy_id}" method="delete"/>

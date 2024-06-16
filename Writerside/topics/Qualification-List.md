@@ -1,6 +1,19 @@
 # Qualification List
 
-<!-- Use the <api-doc> element to specify a group of endpoints with a certain tag.
-Open the Writerside review to the right to see the result. -->
+### Метод: GET /dict/qualification
+#### Описание:
+Этот метод предназначен для получения списка квалификаций. Возвращает массив объектов, каждый из которых представляет собой квалификацию.
 
-<api-endpoint openapi-path="../openapi.json" endpoint="/dict/qualification" method="get"/>
+<api-endpoint openapi-path="../openapi.json" endpoint="/dict/qualification" method="get">
+<response type="200">
+<sample>
+[
+  {
+    "id": "middle",
+    "name": "Средний (Middle)",
+    "habr_id": 4
+  }
+]
+</sample>
+</response>
+</api-endpoint>

@@ -1,6 +1,7 @@
 # Company List
 
-<!-- Use the <api-doc> element to specify a group of endpoints with a certain tag.
-Open the Writerside review to the right to see the result. -->
+### Метод: GET /company/
+#### Описание:
+Метод предназначен для получения списка компаний.
 
 <api-endpoint openapi-path="../openapi.json" endpoint="/company/" method="get"/>

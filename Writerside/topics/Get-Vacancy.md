@@ -1,6 +1,7 @@
 # Get Vacancy
 
-<!-- Use the <api-doc> element to specify a group of endpoints with a certain tag.
-Open the Writerside review to the right to see the result. -->
+### Метод: GET /vacancy/{vacancy_id}
+#### Описание:
+Метод предназначен для получения детальной информации о конкретной вакансии.
 
 <api-endpoint openapi-path="../openapi.json" endpoint="/vacancy/{vacancy_id}" method="get"/>
