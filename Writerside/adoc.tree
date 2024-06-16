@@ -10,6 +10,7 @@
     <toc-element topic="Architecture.md">
         <toc-element topic="C4-Context.md"/>
         <toc-element topic="C4-Container.md"/>
+        <toc-element topic="Схема-базы-данных.md"/>
     </toc-element>
     <toc-element topic="Status-System.md"/>
     <toc-element topic="Матрица-трассабилити.md"/>
