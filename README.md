@@ -5,6 +5,19 @@
 ## Documentation
 
 - [Documentation](https://idev-present.github.io/skillometer)
+- [Project management](https://github.com/orgs/idev-present/projects/1/views/1)
+
+
+## Demo
+- [Documentation](https://idev-present.github.io/skillometer)
+- [API](https://skillometer.idev-present.com/api/v1/docs)
+- [WEB+TWA](https://skillometer.idev-present.com/)
+- [WEB admin](https://admin.skillometer.idev-present.com/)
+- 
+## Demo accounts
+Search in [Documentation](https://idev-present.github.io/skillometer/user-manual.html)
+
+
 
 ## Source code repository
 
@@ -20,13 +33,6 @@
 - [C4_containers](artefacts/architecture/C4/C4_containers.puml)
 - [status flow](artefacts/architecture/status_scheme.puml)
 - [DB schema](artefacts/architecture/DB_schema.puml)
-
-
-## Deployed to
-- [Documentation](https://idev-present.github.io/skillometer)
-- [API](https://skillometer.idev-present.com/api/v1/docs)
-- [WEB+TWA](https://skillometer.idev-present.com/)
-- [WEB admin](https://admin.skillometer.idev-present.com/)
 
 ### External support system
 - Cloud.ru - kubernetes cluster
