@@ -13,18 +13,19 @@
 - [API](https://skillometer.idev-present.com/api/v1/docs)
 - [WEB+TWA](https://skillometer.idev-present.com/)
 - [WEB admin](https://admin.skillometer.idev-present.com/)
-- 
+
 ## Demo accounts
 Search in [Documentation](https://idev-present.github.io/skillometer/user-manual.html)
-
+- Recruiter account [here](https://idev-present.github.io/skillometer/%D1%80%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F.html#-vholyp_10306)
+- Applicant account [here](https://idev-present.github.io/skillometer/%D1%80%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F.html#-vholyp_10318)
 
 
 ## Source code repository
 
 - [root](https://github.com/idev-present/skillometer) - Navigation & Provision & Documentation
-- [API](https://github.com/idev-present/skillometer-api)
-- [WEB admin](https://github.com/idev-present/skillometer-web-admin)
-- [WEB+TWA](https://github.com/idev-present/skillometer-app-client)
+- [API](https://github.com/idev-present/skillometer-api) - branch `master`
+- [WEB admin](https://github.com/idev-present/skillometer-web-admin) - branch `master`
+- [WEB+TWA](https://github.com/idev-present/skillometer-app-client) - branch `master`
 
 ## Artefacts
 - [spec.md](artefacts/input/spec.md)
