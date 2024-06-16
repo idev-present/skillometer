@@ -1,6 +1,7 @@
 # Authorization Callback
 
-<!-- Use the <api-doc> element to specify a group of endpoints with a certain tag.
-Open the Writerside review to the right to see the result. -->
+### Метод: POST /user/auth/callback
+#### Описание:
+Этот метод обрабатывает обратный вызов для аутентификации пользователя. После успешной аутентификации через OAuth2, система получает код авторизации, который далее используется для получения токена доступа. Этот токен позволяет пользователю выполнять последующие действия в системе под своей учетной записью.
 
 <api-endpoint openapi-path="../openapi.json" endpoint="/user/auth/callback" method="post"/>

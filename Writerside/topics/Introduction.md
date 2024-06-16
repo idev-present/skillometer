@@ -28,9 +28,9 @@ Skillometer представляет собой единое приложени�
 
 ## Reference
 
-- **API:** https://skillometer.idev-present.com/api/v1/docs
-- **Client:** https://skillometer.idev-present.com/
-- **Admin:** https://admin.skillometer.idev-present.com/
+- **API:** [https://skillometer.idev-present.com/api/v1/docs](https://skillometer.idev-present.com/api/v1/docs)
+- **Client:** [https://skillometer.idev-present.com/](https://skillometer.idev-present.com/)
+- **Admin:** [https://admin.skillometer.idev-present.com/](https://admin.skillometer.idev-present.com/)
 
 ## Контактная информация
 

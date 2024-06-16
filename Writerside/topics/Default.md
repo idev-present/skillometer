@@ -1,3 +1,0 @@
-# Default
-
-Start typing here...

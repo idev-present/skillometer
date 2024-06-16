@@ -7,7 +7,7 @@
       "name": "IDEV team",
       "email": "info@idev-present.com"
     },
-    "version": "0.10.2"
+    "version": "0.14.5"
   },
   "servers": [
     {
@@ -968,7 +968,14 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
       }
     },
     "/vacancy/{vacancy_id}": {
@@ -1661,6 +1668,48 @@
         }
       }
     },
+    "/reply/{reply_id}/matching": {
+      "get": {
+        "tags": [
+          "reply"
+        ],
+        "summary": "Get Reply Matching",
+        "operationId": "get_reply_matching_reply__reply_id__matching_get",
+        "parameters": [
+          {
+            "name": "reply_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Reply Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/reply/{reply_id}/status": {
       "get": {
         "tags": [
@@ -1712,6 +1761,13 @@
         ],
         "summary": "Set Reply Status",
         "operationId": "set_reply_status_reply__reply_id__status_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
         "parameters": [
           {
             "name": "reply_id",
@@ -1857,6 +1913,52 @@
         }
       }
     },
+    "/reply/{reply_id}/activity": {
+      "get": {
+        "tags": [
+          "reply"
+        ],
+        "summary": "Get Reply Activity",
+        "operationId": "get_reply_activity_reply__reply_id__activity_get",
+        "parameters": [
+          {
+            "name": "reply_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Reply Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReplyActivity"
+                  },
+                  "title": "Response Get Reply Activity Reply  Reply Id  Activity Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/reply/{vacancy_id}/count": {
       "get": {
         "tags": [
@@ -1952,10 +2054,373 @@
         }
       }
     },
-    "/config": {
+    "/chat/room": {
+      "post": {
+        "tags": [
+          "chat"
+        ],
+        "summary": "Create Room",
+        "operationId": "create_room_chat_room_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatRoom"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/chat/room/{room_id}/message": {
+      "post": {
+        "tags": [
+          "chat"
+        ],
+        "summary": "Send Message",
+        "operationId": "send_message_chat_room__room_id__message_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "room_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Room Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/room/{room_id}/message/{message_id}/read_before": {
+      "post": {
+        "tags": [
+          "chat"
+        ],
+        "summary": "Read Message",
+        "operationId": "read_message_chat_room__room_id__message__message_id__read_before_post",
+        "parameters": [
+          {
+            "name": "room_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Room Id"
+            }
+          },
+          {
+            "name": "message_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Message Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/room/{room_id}/history": {
       "get": {
-        "summary": "Show Settings",
-        "operationId": "show_settings_config_get",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Read History",
+        "operationId": "read_history_chat_room__room_id__history_get",
+        "parameters": [
+          {
+            "name": "room_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Room Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Message"
+                  },
+                  "title": "Response Read History Chat Room  Room Id  History Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/": {
+      "post": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Create Event",
+        "operationId": "create_event_events__post",
+        "parameters": [
+          {
+            "name": "reply_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Reply Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Get Event List",
+        "operationId": "get_event_list_events__get",
+        "parameters": [
+          {
+            "name": "applicant_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Applicant Id"
+            }
+          },
+          {
+            "name": "recruiter_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Recruiter Id"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EVENT_STATUS"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  },
+                  "title": "Response Get Event List Events  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/available/days": {
+      "get": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Get Available Days",
+        "operationId": "get_available_days_events_available_days_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "title": "Response Get Available Days Events Available Days Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/available/time": {
+      "get": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Get Available Time",
+        "operationId": "get_available_time_events_available_time_get",
+        "parameters": [
+          {
+            "name": "reply_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Reply Id"
+            }
+          },
+          {
+            "name": "day",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Day"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -1966,14 +2431,159 @@
                 }
               }
             }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/test": {
+    "/events/{event_id}": {
       "get": {
-        "summary": "Debug Endpoint",
-        "operationId": "debug_endpoint_test_get",
+        "tags": [
+          "event"
+        ],
+        "summary": "Read Event",
+        "operationId": "read_event_events__event_id__get",
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Update Event",
+        "operationId": "update_event_events__event_id__put",
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventUpdateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Delete Event",
+        "operationId": "delete_event_events__event_id__delete",
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/healthcheck": {
+      "get": {
+        "summary": "Healthcheck",
+        "operationId": "healthcheck_healthcheck_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -1991,11 +2601,25 @@
   },
   "components": {
     "schemas": {
+      "ACTIVITY_TYPE": {
+        "type": "string",
+        "enum": [
+          "REPLY_STATUS",
+          "EVENT_STATUS"
+        ],
+        "title": "ACTIVITY_TYPE"
+      },
       "Applicant": {
         "properties": {
           "salary_from": {
-            "type": "integer",
-            "exclusiveMinimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Salary From"
           },
           "currency": {
@@ -2138,8 +2762,14 @@
             "description": "Суммарный опыт работы, калькулируется из списка"
           },
           "age": {
-            "type": "integer",
-            "exclusiveMinimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Age"
           },
           "title": {
@@ -2149,10 +2779,8 @@
         },
         "type": "object",
         "required": [
-          "salary_from",
           "id",
           "user_id",
-          "age",
           "title"
         ],
         "title": "Applicant"
@@ -2426,8 +3054,14 @@
       "ApplicantListItem": {
         "properties": {
           "salary_from": {
-            "type": "integer",
-            "exclusiveMinimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Salary From"
           },
           "currency": {
@@ -2570,8 +3204,14 @@
             "description": "Суммарный опыт работы, калькулируется из списка"
           },
           "age": {
-            "type": "integer",
-            "exclusiveMinimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Age"
           },
           "title": {
@@ -2581,10 +3221,8 @@
         },
         "type": "object",
         "required": [
-          "salary_from",
           "id",
           "user_id",
-          "age",
           "title"
         ],
         "title": "ApplicantListItem"
@@ -3034,6 +3672,17 @@
             ],
             "title": "Bio"
           },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender"
+          },
           "salary_from": {
             "anyOf": [
               {
@@ -3213,6 +3862,7 @@
           "phone",
           "email",
           "bio",
+          "gender",
           "salary_from",
           "currency",
           "is_relocation",
@@ -3232,11 +3882,110 @@
         ],
         "title": "CV"
       },
+      "ChatRoom": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Имя",
+            "description": "Имя чата"
+          },
+          "type": {
+            "type": "string",
+            "title": "Тип",
+            "description": "Тип чата: reply или p2p"
+          },
+          "reply_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "ID ответа",
+            "description": "ID отклика, если тип чата - reply"
+          },
+          "applicant_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "ID соискателя",
+            "description": "ID соискателя"
+          },
+          "recruiter_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "ID рекрутера",
+            "description": "ID рекрутера"
+          },
+          "unread_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Счетчик непрочитанных сообщений",
+            "description": "Количество непрочитанных сообщений в чате"
+          },
+          "is_deleted": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Удален",
+            "description": "Признак, был ли удален чат",
+            "default": false
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "ID",
+            "description": "Уникальный идентификатор чата"
+          },
+          "last_updated": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Последнее обновление",
+            "description": "Время последнего обновления чата"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "id",
+          "last_updated"
+        ],
+        "title": "ChatRoom"
+      },
       "City": {
         "properties": {
           "id": {
             "type": "string",
-            "title": "Id"
+            "title": "Id",
+            "description": "ID"
           },
           "fias_id": {
             "anyOf": [
@@ -3247,7 +3996,8 @@
                 "type": "null"
               }
             ],
-            "title": "Fias Id"
+            "title": "Fias Id",
+            "description": "Фиас ID населенного пункта"
           },
           "habr_id": {
             "anyOf": [
@@ -3258,7 +4008,8 @@
                 "type": "null"
               }
             ],
-            "title": "Habr Id"
+            "title": "Habr Id",
+            "description": "ID населенного пункта на habr.ru"
           },
           "habr_alias": {
             "anyOf": [
@@ -3269,7 +4020,8 @@
                 "type": "null"
               }
             ],
-            "title": "Habr Alias"
+            "title": "Habr Alias",
+            "description": "Название населенного пункта на habr.ru"
           },
           "name": {
             "anyOf": [
@@ -3280,7 +4032,8 @@
                 "type": "null"
               }
             ],
-            "title": "Name"
+            "title": "Name",
+            "description": "Название населенного пункта"
           },
           "country_name": {
             "anyOf": [
@@ -3291,7 +4044,8 @@
                 "type": "null"
               }
             ],
-            "title": "Country Name"
+            "title": "Country Name",
+            "description": "Название страны"
           },
           "region_name": {
             "anyOf": [
@@ -3302,7 +4056,8 @@
                 "type": "null"
               }
             ],
-            "title": "Region Name"
+            "title": "Region Name",
+            "description": "Название региона"
           }
         },
         "type": "object",
@@ -3315,7 +4070,8 @@
           "country_name",
           "region_name"
         ],
-        "title": "City"
+        "title": "City",
+        "description": "Словарь городов"
       },
       "Division": {
         "properties": {
@@ -3354,11 +4110,32 @@
         ],
         "title": "Division"
       },
+      "EVENT_STATUS": {
+        "type": "string",
+        "enum": [
+          "PLANNING",
+          "CONFIRMED",
+          "WAITING",
+          "DONE"
+        ],
+        "title": "EVENT_STATUS"
+      },
+      "EVENT_TYPE": {
+        "type": "string",
+        "enum": [
+          "ZOOM",
+          "GOOGLE_MEET",
+          "TELEGRAM",
+          "PHONE"
+        ],
+        "title": "EVENT_TYPE"
+      },
       "EmploymentType": {
         "properties": {
           "id": {
             "type": "string",
-            "title": "Id"
+            "title": "Id",
+            "description": "ID"
           },
           "name": {
             "anyOf": [
@@ -3369,7 +4146,8 @@
                 "type": "null"
               }
             ],
-            "title": "Name"
+            "title": "Name",
+            "description": "Название"
           },
           "habr_id": {
             "anyOf": [
@@ -3380,7 +4158,8 @@
                 "type": "null"
               }
             ],
-            "title": "Habr Id"
+            "title": "Habr Id",
+            "description": "ID на habr.ru"
           },
           "hh_id": {
             "anyOf": [
@@ -3391,7 +4170,8 @@
                 "type": "null"
               }
             ],
-            "title": "Hh Id"
+            "title": "Hh Id",
+            "description": "ID на hh.ru"
           }
         },
         "type": "object",
@@ -3401,7 +4181,317 @@
           "habr_id",
           "hh_id"
         ],
-        "title": "EmploymentType"
+        "title": "EmploymentType",
+        "description": "Словарь типов занятостей"
+      },
+      "Event": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "название события"
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EVENT_TYPE"
+              }
+            ],
+            "description": "тип события: ZOOM, GOOGLE_MEET, TELEGRAM, PHONE"
+          },
+          "payload": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payload",
+            "description": "Ссылка, номер телефона и другие дополнительные данные"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "Описание события"
+          },
+          "start_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start At",
+            "description": "дата и время начала события"
+          },
+          "end_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End At",
+            "description": "дата и время окончания события"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EVENT_STATUS"
+              }
+            ],
+            "description": "статус события: PLANNING, CONFIRMED, WAITING, DONE"
+          },
+          "is_deleted": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Deleted",
+            "description": "пометка об удалении события",
+            "default": false
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "дата и время создания записи"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At",
+            "description": "дата и время последнего обновления записи"
+          },
+          "updated_by": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated By",
+            "description": "идентификатор последнего обновившего пользователя"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "status",
+          "created_at"
+        ],
+        "title": "Event"
+      },
+      "EventForm": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "название события"
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EVENT_TYPE"
+              }
+            ],
+            "description": "тип события: ZOOM, GOOGLE_MEET, TELEGRAM, PHONE"
+          },
+          "payload": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payload",
+            "description": "Ссылка, номер телефона и другие дополнительные данные"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "Описание события"
+          },
+          "start_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start At",
+            "description": "дата и время начала события"
+          },
+          "end_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End At",
+            "description": "дата и время окончания события"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "title": "EventForm"
+      },
+      "EventUpdateForm": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "название события"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EVENT_TYPE"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "тип события: ZOOM, GOOGLE_MEET, TELEGRAM, PHONE"
+          },
+          "payload": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payload",
+            "description": "Ссылка, номер телефона и другие дополнительные данные"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "Описание события"
+          },
+          "start_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start At",
+            "description": "дата и время начала события"
+          },
+          "end_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End At",
+            "description": "дата и время окончания события"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EVENT_STATUS"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "статус события: PLANNING, CONFIRMED, WAITING, DONE"
+          }
+        },
+        "type": "object",
+        "title": "EventUpdateForm"
       },
       "HTTPValidationError": {
         "properties": {
@@ -3433,6 +4523,218 @@
           "value"
         ],
         "title": "KeyValueDict"
+      },
+      "MESSAGE_STATUS": {
+        "type": "string",
+        "enum": [
+          "SENT",
+          "DELIVERED",
+          "READ",
+          "ERROR"
+        ],
+        "title": "MESSAGE_STATUS"
+      },
+      "MESSAGE_TYPE": {
+        "type": "string",
+        "enum": [
+          "TEXT",
+          "LINK",
+          "FILE",
+          "IMAGE"
+        ],
+        "title": "MESSAGE_TYPE"
+      },
+      "MatchingResult": {
+        "properties": {
+          "missed_skills": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Missed Skills",
+            "description": "Недостающие скиллы",
+            "default": [
+
+            ]
+          },
+          "additional_skills": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Additional Skills",
+            "description": "Лишние скиллы",
+            "default": [
+
+            ]
+          },
+          "coverage": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coverage",
+            "description": "Процент",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "MatchingResult"
+      },
+      "Message": {
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MESSAGE_TYPE"
+              }
+            ],
+            "description": "Тип сообщения"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content",
+            "description": "Текст сообщения"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MESSAGE_STATUS"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Статус сообщения"
+          },
+          "from_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "From Id",
+            "description": "UUID отправителя. Может быть пустым"
+          },
+          "to_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "To Id",
+            "description": "UUID получателя. Может быть пустым"
+          },
+          "room_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Room Id",
+            "description": "UUID комнаты. Может быть пустым"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id",
+            "description": "UUID сообщения"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Время создания сообщения"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At",
+            "description": "Время последнего обновления сообщения"
+          },
+          "updated_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated By",
+            "description": "UUID пользователя, который последний раз обновил сообщение"
+          },
+          "is_deleted": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Deleted",
+            "description": "Флаг удаления сообщения",
+            "default": false
+          },
+          "has_entities": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Has Entities",
+            "description": "Используемые сущности в сообщении"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "content",
+          "id",
+          "created_at"
+        ],
+        "title": "Message"
       },
       "Qualification": {
         "properties": {
@@ -3494,6 +4796,18 @@
             ],
             "title": "Owner Id",
             "description": "ID Рекрутера"
+          },
+          "chat_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chat Id",
+            "description": "ID чата"
           },
           "user_comment": {
             "anyOf": [
@@ -3640,6 +4954,17 @@
               }
             ],
             "title": "Updated By Role"
+          },
+          "matching_result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MatchingResult"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Результат сравнения по скиллам"
           }
         },
         "type": "object",
@@ -3654,6 +4979,98 @@
           "updated_by_role"
         ],
         "title": "Reply"
+      },
+      "ReplyActivity": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ACTIVITY_TYPE"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Тип события"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          },
+          "external_id": {
+            "type": "string",
+            "title": "External Id",
+            "description": "ID отклика или события"
+          },
+          "owner_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Owner Id",
+            "description": "ID пользователя"
+          },
+          "owner_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Owner Type",
+            "description": "Соискатель/рекрутер"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "owner": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "external_id",
+          "owner_id",
+          "owner_type",
+          "id",
+          "created_at"
+        ],
+        "title": "ReplyActivity"
       },
       "ReplyCommentForm": {
         "properties": {
@@ -3834,6 +5251,35 @@
         ],
         "title": "SearchStatus"
       },
+      "SendMessage": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MESSAGE_TYPE"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Тип сообщения"
+          },
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content",
+            "description": "Текст сообщения"
+          }
+        },
+        "type": "object",
+        "title": "SendMessage"
+      },
       "Skill": {
         "properties": {
           "id": {
@@ -3912,7 +5358,8 @@
           "division_id",
           "habr_id"
         ],
-        "title": "Skill"
+        "title": "Skill",
+        "description": "Словарь навыков"
       },
       "TokenResponse": {
         "properties": {
@@ -4076,6 +5523,18 @@
             ],
             "title": "Phone",
             "description": "The user's phone number"
+          },
+          "has_applicant": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Has Applicant",
+            "default": false
           },
           "created_at": {
             "anyOf": [

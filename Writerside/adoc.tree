@@ -10,12 +10,14 @@
     <toc-element topic="Architecture.md">
         <toc-element topic="C4-Context.md"/>
         <toc-element topic="C4-Container.md"/>
+        <toc-element topic="Схема-базы-данных.md"/>
     </toc-element>
     <toc-element topic="Status-System.md"/>
     <toc-element topic="Матрица-трассабилити.md"/>
     <toc-element topic="User-Manual.md">
-        <toc-element topic="Recruiter.md"/>
+        <toc-element topic="Регистрация-Авторизация.md"/>
         <toc-element topic="Applicant.md"/>
+        <toc-element topic="Recruiter.md"/>
     </toc-element>
     <toc-element topic="API-Documentation.md">
         <toc-element topic="Dictionaries.md">
@@ -71,16 +73,28 @@
         <toc-element topic="Reply.md">
             <toc-element topic="Reply-List.md"/>
             <toc-element topic="Get-Reply.md"/>
+            <toc-element topic="Get-Reply-Matching.md"/>
             <toc-element topic="Get-Reply-Next-Status-Flow.md"/>
             <toc-element topic="Set-Reply-Status.md"/>
             <toc-element topic="Reply-Comment-Create.md"/>
             <toc-element topic="Get-Reply-Comments.md"/>
+            <toc-element topic="Get-Reply-Activity.md"/>
             <toc-element topic="Reply-Count-By-Status.md"/>
         </toc-element>
         <toc-element topic="CV.md"/>
-        <toc-element topic="Default.md">
-            <toc-element topic="Show-Settings.md"/>
-            <toc-element topic="Debug-Endpoint.md"/>
+        <toc-element topic="Chat.md">
+            <toc-element topic="Send-Message.md"/>
+            <toc-element topic="Read-Message.md"/>
+            <toc-element topic="Read-History.md"/>
+        </toc-element>
+        <toc-element topic="Event.md">
+            <toc-element topic="Create-Event.md"/>
+            <toc-element topic="Get-Events.md"/>
+            <toc-element topic="Get-Available-Days.md"/>
+            <toc-element topic="Get-Available-Time.md"/>
+            <toc-element topic="Read-Event.md"/>
+            <toc-element topic="Update-Event.md"/>
+            <toc-element topic="Delete-Event.md"/>
         </toc-element>
     </toc-element>
 </instance-profile>
